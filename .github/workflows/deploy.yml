@@ -9,8 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
+    - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # makes sure we get the whole repo
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
