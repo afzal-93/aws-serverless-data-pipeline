@@ -12,7 +12,13 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
-        fetch-depth: 0  # makes sure we get the whole repo
+        fetch-depth: 0
+
+    - name: List repo root
+      run: ls -la
+
+    - name: List terraform folder
+      run: ls -la terraform/
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
@@ -22,6 +28,3 @@ jobs:
 
     - name: Terraform Plan
       run: terraform -chdir=terraform plan
-
-    - name: Terraform Apply
-      run: terraform -chdir=terraform apply -auto-approve
