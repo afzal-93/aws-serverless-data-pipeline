@@ -1,5 +1,5 @@
 variable "raw_bucket_name" {
-  description = "Name of the raw S3 bucket"
+  description = "Name of the raw data S3 bucket"
   type        = string
 }
 
@@ -9,13 +9,12 @@ variable "rds_db_identifier" {
 }
 
 variable "db_username" {
-  description = "Master username for RDS"
+  description = "Master username for the RDS database"
   type        = string
-  sensitive   = true
 }
 
 variable "db_password" {
-  description = "Master password for RDS"
+  description = "Master password for the RDS database"
   type        = string
   sensitive   = true
 }
