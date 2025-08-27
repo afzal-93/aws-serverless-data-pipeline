@@ -1,20 +1,21 @@
-variable "region" {
-  default = "us-east-1"
+variable "raw_bucket_name" {
+  description = "Name of the raw S3 bucket"
+  type        = string
 }
 
-variable "s3_raw_bucket_name" {
-  default = "my-raw-data-bucket-afzal-123"
+variable "rds_db_identifier" {
+  description = "Identifier for the RDS instance"
+  type        = string
 }
 
-variable "rds_username" {
-  default = "admin"
+variable "db_username" {
+  description = "Master username for RDS"
+  type        = string
+  sensitive   = true
 }
 
-variable "rds_password" {
-  default = "ChangeMe123!"
-  sensitive = true
-}
-
-variable "rds_db_name" {
-  default = "processed_data_db"
+variable "db_password" {
+  description = "Master password for RDS"
+  type        = string
+  sensitive   = true
 }
