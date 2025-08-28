@@ -3,5 +3,5 @@ output "s3_raw_bucket_name" {
 }
 
 output "rds_endpoint" {
-  value = aws_db_instance.postgres.address
+  value = aws_db_instance.postgres.endpoint
 }
