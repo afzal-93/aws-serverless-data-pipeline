@@ -1,22 +1,37 @@
-# S3 Bucket
-resource "aws_s3_bucket" "raw_data" {
-  bucket = "my-raw-data-bucket-${random_id.suffix.hex}" # ✅ ensures unique bucket name
+provider "aws" {
+  region = "eu-west-1"
 }
 
+# Generate random suffix for unique names
 resource "random_id" "suffix" {
   byte_length = 4
 }
 
-# RDS PostgreSQL
-resource "aws_db_instance" "postgres" {
-  identifier           = "my-postgres-db"
-  engine               = "postgres"
-  engine_version       = "16.3"   # ✅ supported version
-  instance_class       = "db.t3.micro"
-  allocated_storage    = 20
-  username             = "myadmin"
-  password             = "password1993!" # ⚠️ change for security
-  publicly_accessible  = true
-  skip_final_snapshot  = true
+# S3 bucket
+resource "aws_s3_bucket" "raw_data" {
+  bucket = "my-raw-data-bucket-${random_id.suffix.hex}"
+  acl    = "private"
+
+  tags = {
+    Name = "RawDataBucket"
+  }
 }
 
+# RDS Postgres instance
+resource "aws_db_instance" "postgres" {
+  identifier             = "my-postgres-db-${random_id.suffix.hex}"
+  engine                 = "postgres"
+  engine_version         = "16.3"
+  instance_class         = "db.t3.micro"
+  allocated_storage      = 20
+  username               = "myadminuser"                     # safe username
+  password               = "ChangeThisToAStrongPassword123!" # replace with secure password
+  publicly_accessible    = true
+  skip_final_snapshot    = true
+  backup_retention_period = 7
+  auto_minor_version_upgrade = true
+
+  tags = {
+    Name = "MyPostgresDB"
+  }
+}
