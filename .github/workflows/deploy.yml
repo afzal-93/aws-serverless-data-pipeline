@@ -38,3 +38,5 @@ jobs:
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
         run: terraform -chdir=terraform apply -auto-approve
+- name: Verify S3 bucket exists
+  run: aws s3 ls "s3://my-raw-data-bucket" --region eu-west-1
