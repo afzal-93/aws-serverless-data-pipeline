@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "eu-west-1"
-}
-
 # Generate random suffix for unique names
 resource "random_id" "suffix" {
   byte_length = 4
@@ -35,3 +31,4 @@ resource "aws_db_instance" "postgres" {
     Name = "MyPostgresDB"
   }
 }
+
